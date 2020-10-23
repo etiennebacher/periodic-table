@@ -300,7 +300,7 @@ gt_final <- gt_colored %>%
   opt_footnote_marks(marks = "standard")
 
 
-gtsave(gt_final, filename = "periodic-table.pdf")
+gtsave(gt_final, filename = "periodic-table.png")
 
 
 
