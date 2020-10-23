@@ -36,14 +36,22 @@ elements <- tibble(
 #####################################################################
 
 gt_colored <- elements %>%
+  
+  ## put numbers and abbreviations on separate lines
   mutate(
     across(
       .cols = everything(), 
       .fns = ~ str_replace_all(string = .," ","<br>")
     )
   ) %>% 
-  gt(rowname_col = "rowname") %>% 
   fmt_markdown(columns = TRUE) %>%
+  
+  
+  ## numbers as rownames
+  gt(rowname_col = "rowname") %>% 
+  
+  
+  ## alignment in cells
   cols_align(align = "center") %>%
   
   
@@ -220,6 +228,8 @@ gt_colored <- elements %>%
 
 
 gt_final <- gt_colored %>%
+  
+  ## remove borders for empty cells
   tab_header(
     title = "Periodic table of elements"
   ) %>%
@@ -254,6 +264,8 @@ gt_final <- gt_colored %>%
       )
     )
   ) %>%
+  
+  ## add borders on every side for full cells
   tab_style(
     style = cell_borders(),
     locations = list(
@@ -279,6 +291,8 @@ gt_final <- gt_colored %>%
       )
     )
   ) %>%
+  
+  ## remove borders for non-cells places
   tab_options(
     table.border.top.color = "#FFFFFF",
     table.border.bottom.color = "#FFFFFF",
@@ -289,6 +303,8 @@ gt_final <- gt_colored %>%
     column_labels.border.bottom.color = "#FFFFFF",
     stub.border.color = "#FFFFFF"
   ) %>%
+  
+  ## add footnotes
   tab_footnote(
     footnote = "(a) Whether group 3 is composed of -La-Ac or -Lu-Lr is under review by the IUPAC. (b) The last two members of the group are known as transition metals.",
     locations = cells_column_labels(columns = "3")
@@ -297,6 +313,8 @@ gt_final <- gt_colored %>%
     footnote = "Some authors treat Zn, Cd and Hg as transition metals.",
     locations = cells_column_labels(columns = "12")
   ) %>%
+  
+  ## change footnote symbol (can't choose specifically those used on Wikipedia)
   opt_footnote_marks(marks = "standard")
 
 
