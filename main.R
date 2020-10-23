@@ -219,7 +219,7 @@ gt_colored <- elements %>%
 
 
 
-gt_colored %>%
+gt_final <- gt_colored %>%
   tab_header(
     title = "Periodic table of elements"
   ) %>%
@@ -299,6 +299,8 @@ gt_colored %>%
   ) %>%
   opt_footnote_marks(marks = "standard")
 
+
+gtsave(gt_final, filename = "periodic-table.pdf")
 
 
 
