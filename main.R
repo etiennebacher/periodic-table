@@ -292,7 +292,7 @@ gt_final <- gt_colored %>%
     )
   ) %>%
   
-  ## remove borders for non-cells places
+  ## remove borders for non-cells places by putting them in white as "style = NULL" doesn't work
   tab_options(
     table.border.top.color = "#FFFFFF",
     table.border.bottom.color = "#FFFFFF",
