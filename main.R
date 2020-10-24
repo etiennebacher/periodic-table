@@ -37,14 +37,13 @@ elements <- tibble(
 
 gt_colored <- elements %>%
   
-  ## put numbers and abbreviations on separate lines
+  # create markdown instruction to make numbers and abbreviations on separate lines
   mutate(
     across(
       .cols = everything(), 
       .fns = ~ str_replace_all(string = .," ","<br>")
     )
-  ) %>% 
-  fmt_markdown(columns = TRUE) %>%
+  ) %>%
   
   
   ## numbers as rownames
@@ -53,6 +52,9 @@ gt_colored <- elements %>%
   
   ## alignment in cells
   cols_align(align = "center") %>%
+  
+  ## put numbers and abbreviations on separate lines
+  fmt_markdown(columns = TRUE) %>%
   
   
   # Non metals reactive
@@ -237,7 +239,7 @@ gt_final <- gt_colored %>%
     style = list(
       cell_borders(
         sides = "all",
-        color = "#FFFFFF"
+        weight = NULL
       )
     ),
     locations = list(
@@ -292,6 +294,7 @@ gt_final <- gt_colored %>%
     )
   ) %>%
   
+  
   ## remove borders for non-cells places by putting them in white as "style = NULL" doesn't work
   tab_options(
     table.border.top.color = "#FFFFFF",
@@ -300,8 +303,7 @@ gt_final <- gt_colored %>%
     table.border.left.color = "#FFFFFF",
     table.border.right.color = "#FFFFFF",
     heading.border.bottom.color = "#FFFFFF",
-    column_labels.border.bottom.color = "#FFFFFF",
-    stub.border.color = "#FFFFFF"
+    column_labels.border.bottom.color = "#FFFFFF"
   ) %>%
   
   ## add footnotes
